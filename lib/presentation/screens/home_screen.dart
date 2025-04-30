@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:vishare/data/models/vehicle_model.dart';
 import 'package:vishare/data/repositories/vehicle_repository.dart';
 
+import 'package:flutter/foundation.dart';
+import 'dart:io' show Platform;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -94,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Implement QR scanner logic
   }
 
-  void _showBookingDialog(Vehicle vehicle) {
+  /*void _showBookingDialog(Vehicle vehicle) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -106,6 +109,44 @@ class _HomeScreenState extends State<HomeScreen> {
             Text('Tariffa: ${vehicle.pricePerMinute.toStringAsFixed(2)}€/min'),
             const SizedBox(height: 8),
             Text('Batteria: ${vehicle.battery.toStringAsFixed(0)}%'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            child: const Text('ANNULLA'),
+            onPressed: () => Navigator.pop(ctx),
+          ),
+          TextButton(
+            child: const Text('PRENOTA'),
+            onPressed: () {
+              Provider.of<VehicleRepository>(context, listen: false)
+                .selectVehicle(vehicle);
+              Navigator.pop(ctx);
+              Navigator.pushNamed(context, '/booking');
+            },
+          ),
+        ],
+      ),
+    );
+  }*/
+
+  void _showBookingDialog(Vehicle vehicle) {
+    // Always check if platform is mobile before showing QR options
+    final isMobile = !kIsWeb && (Platform.isAndroid || Platform.isIOS);
+    
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Prenota ${vehicle.type}'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Tariffa: ${vehicle.pricePerMinute.toStringAsFixed(2)}€/min'),
+            Text('Batteria: ${vehicle.battery.toStringAsFixed(0)}%'),
+            if(isMobile) ...[
+              const SizedBox(height: 16),
+              const Text('Scansiona QR code dopo la prenotazione'),
+            ]
           ],
         ),
         actions: [

@@ -19,8 +19,6 @@ class Vehicle {
 
   factory Vehicle.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    
-    // Gestione GeoPoint
     final GeoPoint geoPoint = data['location'];
     
     return Vehicle(

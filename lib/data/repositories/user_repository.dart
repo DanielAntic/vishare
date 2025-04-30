@@ -5,7 +5,7 @@ class UserRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Get Firestore user document
+
   Future<Map<String, dynamic>> getUserData() async {
     final User? user = _auth.currentUser;
     if (user == null) throw Exception('User not logged in');
@@ -16,7 +16,7 @@ class UserRepository {
     return doc.data() as Map<String, dynamic>? ?? {};
   }
 
-  // Get user's bookings stream
+
   Stream<QuerySnapshot> getBookingsStream() {
     final User? user = _auth.currentUser;
     if (user == null) throw Exception('User not logged in');

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "69512579449",
+    "project_id": "vishare-project",
+    "storage_bucket": "vishare-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69512579449:android:38ba71fd6b4f291ae987a8",
+        "android_client_info": {
+          "package_name": "com.example.vishare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4qt1uS9aimM2f-tIbMyWKqi7jEu67mWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vishare/presentation/screens/signup_screen.dart';
 import 'package:vishare/presentation/screens/home_screen.dart';
 
+import 'package:vishare/logger.dart';
+
+
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
@@ -32,7 +35,9 @@ class _SignInScreenState extends State<SignInScreen> {
           MaterialPageRoute(builder: (_) => const HomeScreen()),
         );
       }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e, stack) {
+      logger.e('FirebaseAuthException: $e', stackTrace: stack);
+      
       String errorMessage = 'Errore di autenticazione';
       if (e.code == 'user-not-found') errorMessage = 'Utente non trovato';
       else if (e.code == 'wrong-password') errorMessage = 'Password errata';
